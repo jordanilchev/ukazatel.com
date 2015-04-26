@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>Указател - Карта на градовете (ukazatel.com)</title>
+    <meta name="keywords"
+          content="указател, ukazatel, map, карта, street, bulgaria, улици, улица, карта на,Варна,Пловдив,София,Бургас,Стара Загора,Русе,Търново,търсене,указател на, фирми, услуги, компютри, хотели, ресторанти, заведения, кина, карти, map of Sofia, карта на улиците">
+    <meta name="description"
+          content="Указател - спасението в градската джунгла! Карти на българските градове. Търсене на адрес.">
+    <link href="map.css" rel="stylesheet" type="text/css">
+    <link href="jquery.autocomplete.css" rel="stylesheet"
+          type="text/css">
+    <link href="images/favicon.png" rel="icon" type="image/png">
+</header>
+<body>
+<div id="viewport">
+    <div id="header">
+        <div id="searchbox">
+            <input type="hidden" name="c" id="country" value="България">
+            <input type="hidden" name="t" id="town" value="">
+
+            <div id="searchcontorl">
+                <input type="text" size="50" name="s" id="search" value="Търсене: ул., бул., град"
+                       title="Търсене: ул., бул., град" class="inputHint">
+            </div>
+            <div id="regionbox">
+                в&nbsp;<span id="lblRegion"></span><a
+                    href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/">България</a>
+            </div>
+        </div>
+    </div>
+    <div id="townlist" style="display: block;">
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%A1%D0%BE%D1%84%D0%B8%D1%8F/">Карта&nbsp;на&nbsp;София</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%92%D0%B0%D1%80%D0%BD%D0%B0/">
+            Карта&nbsp;на&nbsp;Варна
+        </a>, <a
+            href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%9F%D0%BB%D0%BE%D0%B2%D0%B4%D0%B8%D0%B2/">Карта&nbsp;на&nbsp;Пловдив</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%91%D1%83%D1%80%D0%B3%D0%B0%D1%81/">Карта&nbsp;на&nbsp;Бургас</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%A0%D1%83%D1%81%D0%B5/">
+            Карта&nbsp;на&nbsp;Русе
+        </a>, <a
+            href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%A1%D1%82%D0%B0%D1%80%D0%B0%20%D0%97%D0%B0%D0%B3%D0%BE%D1%80%D0%B0/">Карта&nbsp;на&nbsp;Стара&nbsp;Загора</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%9F%D0%BB%D0%B5%D0%B2%D0%B5%D0%BD/">Карта&nbsp;на&nbsp;Плевен</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%A1%D0%BB%D0%B8%D0%B2%D0%B5%D0%BD/">
+            Карта&nbsp;на&nbsp;Сливен
+        </a>, <a
+            href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%A8%D1%83%D0%BC%D0%B5%D0%BD/">Карта&nbsp;на&nbsp;Шумен</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D1%87/">Карта&nbsp;на&nbsp;Добрич</a>,
+        <a href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%9A%D1%8E%D1%81%D1%82%D0%B5%D0%BD%D0%B4%D0%B8%D0%BB/">
+            Карта&nbsp;на&nbsp;Кюстендил
+        </a>, <a
+            href="%D0%9A%D0%B0%D1%80%D1%82%D0%B0/%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F/%D0%93%D0%B0%D0%B1%D1%80%D0%BE%D0%B2%D0%BE/">Карта&nbsp;на&nbsp;Габрово</a>
+    </div>
+    <div id="map_canvas"></div>
+    <div id="footer">
+        &copy; ukazatel.com
+    </div>
+</div>
+
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="jquery.autocomplete_geomod.js"></script>
+<script type="text/javascript" src="geo_autocomplete.js"></script>
+
+<script type="text/javascript" language="javascript">
+    var map,
+            geocoder,
+            initLatLng = new google.maps.LatLng(42.730874, 25.488281),
+            initCountry = 'България',
+            zoom = 15,
+            infoNote = '',
+            ukazatelLink = '<a class="stamp" href="http://ukazatel.com">ukazatel.com - Карти на българските градове</a>';
+
+    $().ready(function () {
+        var initZoom = (document.body.offsetWidth > 800) ? 8 : 7;
+        geocoder = new google.maps.Geocoder();
+
+        var search = document.getElementById('search');
+        var town = document.getElementById('town');
+        var country = document.getElementById('country');
+        var qregex = new RegExp(".com/([^/]*)/([^/]*)/?([^/]*)/?[^?]?", "ig");
+        var matchList = qregex.exec(window.location.href);
+        if (matchList) {
+            if (matchList.length > 3) {
+                town.value = decodeURI(matchList[3]);
+            }
+            if (matchList.length > 2) {
+                country.value = initCountry; //hardcode
+            }
+        } else {
+            var c = unescape(decodeURI(getQuerystring('c', initCountry)));
+            if (c) country.value = c;
+            var t = unescape(decodeURI(getQuerystring('t', '')));
+            if (t) town.value = t;
+        }
+
+        if (town.value != '') {
+            document.title = "Карта на " + town.value + ' (www.ukazatel.com)';
+            initZoom = zoom;
+        } else {
+            $('#townlist').show();
+            zoom = zoom - 1;
+        }
+
+        var initMapOptions = {zoom: initZoom, center: initLatLng, mapTypeId: google.maps.MapTypeId.ROADMAP};
+        map = new google.maps.Map(document.getElementById("map_canvas"), initMapOptions);
+
+        var lbl = document.getElementById('lblRegion');
+        if (lbl && town.value != '') lbl.innerHTML = town.value + ', ';
+
+        if (search) {
+            var s = unescape(decodeURI(getQuerystring('s', '')));
+            if (s) search.value = s;
+            infoNote = unescape(decodeURI(getQuerystring('i', '')));
+
+            if (search.value != '' && search.value != search.title) {
+                showAddress(search.value + ',' + regionToString(town.value, country.value));
+            }
+            else if (town.value != '') {
+                showAddress(regionToString(town.value, country.value));
+            }
+        }
+
+        $('#search').geo_autocomplete(geocoder, {
+            mapkey: 'ABQIAAAACrc_mB51eFCkSVNDalw8iBR_IDpGXrLwn9Wazx6qePU0x7Md7BQxLG3SQAtzKgBLQrjcex1pukc7hA',
+            selectFirst: true,
+            minChars: 3,
+            cacheLength: 50,
+            width: 310,
+            scroll: true,
+            scrollHeight: 330,
+            mapSearchSufix: (',' + regionToString(town.value, country.value)),
+            mapSkipBlanks: (town.value != '')
+        }).result(function (_event, _data) {
+            if (_data) {
+                showResults([_data], google.maps.GeocoderStatus.OK);
+            }
+            ;
+        });
+
+        $("#search").focus(function () {
+            if (this.value == this.title) {
+                this.value = '';
+                this.className = '';
+            }
+            this.select();
+        });
+    });
+
+    regionToString = function (t, c) {
+        var r = c;
+        if (t && t != '') r = t + ', ' + r;
+        return r;
+    }
+
+    showAddress = function (address) {
+        if (geocoder) {
+            geocoder.geocode({'address': address}, showResults);
+        }
+    }
+
+    showResults = function (resultArray, status) {
+        $('#townlist').hide();
+        if (status == google.maps.GeocoderStatus.OK) {
+            var r = resultArray[0];
+            if (r.types && r.types in {route: 1, street_address: 1, street_number: 1, floor: 1, room: 1}) {
+                map.setCenter(r.geometry.location);
+                map.setZoom(zoom);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: r.geometry.location,
+                    title: r.formatted_address
+                });
+                if (infoNote && infoNote != '') {
+                    var contentString = '<span class="info">' + infoNote + '</span><br /><i>' + r.formatted_address + '<br /></i><br />' + ukazatelLink;
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    infowindow.open(map, marker);
+                }
+
+                return;
+            } else if (r.types && jQuery.inArray('locality', r.types) > -1) { //nav to town if blank
+                var t = $('#town');
+                if (t && t.val() == '') {
+                    document.location.replace('/Карта/' + initCountry + '/' + $.trim(r.address_components[0].long_name) + '/');
+                    return;
+                }
+            }
+            map.setCenter(r.geometry.location);
+            map.setZoom(zoom);
+        }
+    }
+
+    function getQuerystring(key, default_) {
+        if (default_ == null) default_ = "";
+        key = key.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");
+        var qs = regex.exec(window.location.href);
+        if (qs == null)
+            return default_;
+        else
+            return qs[1].replace(/\+/g, ' ');
+    }
+
+</script>
+</body>
+</html>
